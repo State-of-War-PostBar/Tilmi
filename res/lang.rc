@@ -1,0 +1,113 @@
+STRINGTABLE
+BEGIN
+
+    // ------------------------
+    // English
+    // ------------------------
+
+    101, L"Note: Please read Readme.txt before using!!!\0"
+
+    102, L"Mode 1: Create blank til/tmi\0"
+    103, L"Map Width:\0"
+    104, L"Map Height:\0"
+    105, L"Generate...\0"
+
+    106, L"Mode 2: bmp ---> til/tmi\0"
+    107, L"Bmp file path:\0"
+    108, L"Convert\0"
+
+    109, L"Mode 3: til/tmi ---> bmp\0"
+    110, L"Til file path:\0"
+    111, L"Tmi file path:\0"
+
+    112, L"Version Beta 1.0, Author: Taxerap\0"
+    113, L"Exit\0"
+
+    114, L"Til file (*.til)\0*.til\0\0"
+    115, L"Tmi file (*.tmi)\0*.tmi\0\0"
+    116, L"Bmp file (*.bmp)\0*.bmp\0\0"
+
+    117, L"Select input til file\0\0"
+    118, L"Select output til file\0\0"
+    119, L"Select input tmi file\0\0"
+    120, L"Select output tmi file\0\0"
+    121, L"Select input bmp file\0\0"
+    122, L"Select output bmp file\0\0"
+
+    123, L"OK\0"
+
+    124, L"Done!\0"
+
+    125, L"Error\0"
+
+    126, L"Cannot open til file!\0"
+    127, L"Cannot create output til file!\0"
+    128, L"Cannot open tmi file!\0"
+    129, L"Cannot create output tmi file!\0"
+    130, L"Cannot open bmp file!\0"
+    131, L"Cannot create output bmp file!\0"
+    132, L"File name is too long!\0"
+
+    133, L"Invalid map width/height.\0"
+
+    134, L"Invalid bmp file.\0"
+    135, L"Bmp is not monochrome.\0"
+    136, L"Bmp's dimensions are not multiples of 32.\0"
+
+    137, L"Tmi does not pair with the til provided.\0"
+
+    // ------------------------
+    // Simplified Chinese
+    // ------------------------
+
+    201, L"\x6ce8\xff1a\x4f7f\x7528\x524d\x8bf7\x52a1\x5fc5\x9605\x8bfb\x5fc5\x8bfb\x002e\x0074\x0078\x0074\x6587\x4ef6\xff01\xff01\xff01\0"
+
+    202, L"\x529f\x80fd\x4e00\xff1a\x751f\x6210\x7a7a\x767d\x0074\x0069\x006c\x002f\x0074\x006d\x0069\0"
+    203, L"\x5730\x56fe\x5bbd\x5ea6\xff1a\0"
+    204, L"\x5730\x56fe\x9ad8\x5ea6\xff1a\0"
+    205, L"\x751f\x6210\x002e\x002e\x002e\0"
+
+    206, L"\x529f\x80fd\x4e8c\xff1a\x8f6c\x6362\x0062\x006d\x0070\x5230\x0074\x0069\x006c\x002f\x0074\x006d\x0069\0"
+    207, L"\x0042\x006d\x0070\x6587\x4ef6\xff1a\0"
+    208, L"\x8f6c\x6362\0"
+
+    209, L"\x529f\x80fd\x4e09\xff1a\x8f6c\x6362\x0074\x0069\x006c\x002f\x0074\x006d\x0069\x5230\x0062\x006d\x0070\0"
+    210, L"\x0054\x0069\x006c\x6587\x4ef6\xff1a\0"
+    211, L"\x0054\x006d\x0069\x6587\x4ef6\xff1a\0"
+
+    212, L"\x0042\x0065\x0074\x0061\x0020\x0031\x002e\x0030\x7248\x672c\xff0c\x4f5c\x8005\xff1a\x8fa3\x5b50\x9e21\xff08\x0054\x0061\x0078\x0065\x0072\x0061\x0070\xff09\0"
+    213, L"\x9000\x51fa\0"
+
+    214, L"\x0054\x0069\x006c\x6587\x4ef6\x0020\x0028\x002a\x002e\x0074\x0069\x006c\x0029\0\x002a\x002e\x0074\x0069\x006c\0\0"
+    215, L"\x0054\x006d\x0069\x6587\x4ef6\x0020\x0028\x002a\x002e\x0074\x006d\x0069\x0029\0\x002a\x002e\x0074\x006d\x0069\0\0"
+    216, L"\x0042\x006d\x0070\x6587\x4ef6\x0020\x0028\x002a\x002e\x0062\x006d\x0070\x0029\0\x002a\x002e\x0062\x006d\x0070\0\0"
+
+    217, L"\x9009\x62e9\x8f93\x5165\x0074\x0069\x006c\x6587\x4ef6\0\0"
+    218, L"\x9009\x62e9\x8f93\x51fa\x0074\x0069\x006c\x6587\x4ef6\0\0"
+    219, L"\x9009\x62e9\x8f93\x5165\x0074\x006d\x0069\x6587\x4ef6\0\0"
+    220, L"\x9009\x62e9\x8f93\x51fa\x0074\x006d\x0069\x6587\x4ef6\0\0"
+    221, L"\x9009\x62e9\x8f93\x5165\x0062\x006d\x0070\x6587\x4ef6\0\0"
+    222, L"\x9009\x62e9\x8f93\x51fa\x0062\x006d\x0070\x6587\x4ef6\0\0"
+
+    223, L"\x004f\x004b\0"
+
+    224, L"\x5b8c\x6210\xff01\0"
+
+    225, L"\x9519\x8bef\0"
+
+    226, L"\x65e0\x6cd5\x6253\x5f00\x8f93\x5165\x0074\x0069\x006c\x6587\x4ef6\xff01\0"
+    227, L"\x65e0\x6cd5\x521b\x5efa\x8f93\x51fa\x0074\x0069\x006c\x6587\x4ef6\xff01\0"
+    228, L"\x65e0\x6cd5\x6253\x5f00\x8f93\x5165\x0074\x006d\x0069\x6587\x4ef6\xff01\0"
+    229, L"\x65e0\x6cd5\x521b\x5efa\x8f93\x51fa\x0074\x006d\x0069\x6587\x4ef6\xff01\0"
+    230, L"\x65e0\x6cd5\x6253\x5f00\x8f93\x5165\x0062\x006d\x0070\x6587\x4ef6\xff01\0"
+    231, L"\x65e0\x6cd5\x521b\x5efa\x8f93\x51fa\x0062\x006d\x0070\x6587\x4ef6\xff01\0"
+    232, L"\x6587\x4ef6\x540d\x8fc7\x957f\xff01\0"
+
+    233, L"\x5730\x56fe\x5bbd\x5ea6\x002f\x9ad8\x5ea6\x65e0\x6548\xff01\0"
+
+    234, L"\x0042\x006d\x0070\x6587\x4ef6\x65e0\x6548\xff01\0"
+    235, L"\x0042\x006d\x0070\x4e0d\x662f\x0031\x4f4d\x9ed1\x767d\x4f4d\x56fe\xff01\0"
+    236, L"\x0042\x006d\x0070\x5bbd\x5ea6\x002f\x9ad8\x5ea6\x4e0d\x662f\x0033\x0032\x7684\x500d\x6570\xff01\0"
+
+    237, L"\x0054\x006d\x0069\x65e0\x6cd5\x914d\x5bf9\x5bf9\x5e94\x8be5\x0074\x0069\x006c\x6587\x4ef6\xff01\0"
+END

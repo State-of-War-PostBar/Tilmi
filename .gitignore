@@ -1,0 +1,7 @@
+*.exe
+*.res
+*.bat
+*.gch
+
+/.vscode/
+/bin/

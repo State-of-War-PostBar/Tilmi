@@ -1,0 +1,33 @@
+1 ICON "sow.ico"
+
+#include "winuser.h"
+
+CREATEPROCESS_MANIFEST_RESOURCE_ID RT_MANIFEST "tilmi.manifest"
+
+#include "winver.h"
+
+1 VERSIONINFO
+FILEVERSION 2, 1, 0, 0
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904E4"
+        BEGIN
+            VALUE "Comments", "Beta Version!"
+            VALUE "CompanyName", "State of War PostBar"
+            VALUE "Publisher", "State of War PostBar"
+            VALUE "FileDescription", "Tilmi"
+            VALUE "FileVersion", "2.1.0.0"
+            VALUE "InternalName", "tilmi"
+            VALUE "LegalCopyright", "CL/PD | State of War PostBar"
+            VALUE "LegalTrademarks", "Public Domain @ State of War Postbar"
+            VALUE "OriginalFilename", "tilmi.exe"
+            VALUE "ProductName", "Tilmi"
+            VALUE "ProductVersion", "Beta 1.1"
+    END
+END
+BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x0409, 0x04e4
+    END
+END
