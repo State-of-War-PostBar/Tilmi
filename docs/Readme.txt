@@ -1,8 +1,8 @@
 Note: For systems eariler than Windows 10 to run this program you need UCRT.
 (https://support.microsoft.com/en-us/topic/update-for-universal-c-runtime-in-windows-322bf30f-4735-bb94-3949-49f5c49f4732)
 
-Beta 1.1 Update:
-    - Fixes a bug that forbids this program to work on Windows 7
+Beta 1.2 Update:
+    - Fixes a bug that screws up negative height bmp
 
 ---------------------------------
 

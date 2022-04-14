@@ -1,8 +1,8 @@
 注：Windows 10以下系统运行此程序需要UCRT.
 (https://support.microsoft.com/zh-cn/topic/update-for-universal-c-runtime-in-windows-322bf30f-4735-bb94-3949-49f5c49f4732)
 
-Beta 1.1版本更新：
-    - 修复了Win7下无法运行的问题
+Beta 1.2版本更新：
+    - 修复了负高度bmp处理不正常的问题
 
 ---------------------------------
 

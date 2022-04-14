@@ -508,8 +508,8 @@ MainWindowProc( HWND handle, UINT message, WPARAM wp, LPARAM lp )
                     if (!image_width || !image_height || image_width % 32 || image_height % 32)
                         TILMI_ERROR_CLEANUP(TILMI_STR_ERR_BMP_NOT_32_ALIGN, mode2_clean_bmp_map);
 
-                    uint32_t map_width = image_width / 32;
-                    uint32_t map_height = image_height / 32;
+                    int32_t map_width = image_width / 32;
+                    int32_t map_height = image_height / 32;
 
                     unsigned char *bmp_bits = bmp_data + bmp_file_header->bfOffBits;
 
@@ -780,8 +780,8 @@ MainWindowProc( HWND handle, UINT message, WPARAM wp, LPARAM lp )
                         til_data_ptr += til_block_size + 4;
                     }
 
-                    uint32_t map_width = 0;
-                    uint32_t map_height = 0;
+                    int32_t map_width = 0;
+                    int32_t map_height = 0;
 
                     DWORD size_io = 0;
                     ReadFile(tmi_in, &map_width, 2, &size_io, NULL);
