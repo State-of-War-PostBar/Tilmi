@@ -5,7 +5,7 @@
 **************************************************************************************************
 *                                                                                                *
 *                     A tool for creating State of War's til and tmi files.                      *
-*               (ɔ) 2017 - 2022 State of War Baidu Postbar, some rights reserved.                *
+*               (ɔ) 2017 - 2022 State of War Baidu PostBar, some rights reserved.                *
 *                                                                                                *
 *             Tilmi is a free software. You can freely do whatever you want with it              *
 *     under the JUST DON'T BOTHER ME PUBLIC LICENSE (hereinafter referred to as the license)     *
@@ -39,8 +39,7 @@ static HINSTANCE program_instance;
 
 static TilmiLanguage chosen_language;
 
-static int res_width;
-static int res_height;
+static int res_width, res_height;
 
 static HANDLE icon_sow;
 static HANDLE cursor_arrow;
@@ -508,8 +507,11 @@ MainWindowProc( HWND handle, UINT message, WPARAM wp, LPARAM lp )
                     if (!image_width || !image_height || image_width % 32 || image_height % 32)
                         TILMI_ERROR_CLEANUP(TILMI_STR_ERR_BMP_NOT_32_ALIGN, mode2_clean_bmp_map);
 
-                    int32_t map_width = image_width / 32;
-                    int32_t map_height = image_height / 32;
+                    int16_t map_width = image_width / 32;
+                    int16_t map_height = image_height / 32;
+
+                    if (map_width < 1 || map_width > 127 || map_height < 1 || map_height > 127)
+                        TILMI_ERROR_CLEANUP(TILMI_STR_ERR_INVALID_MAP_WIDTH_HEIGHT, mode2_clean_bmp_map);
 
                     unsigned char *bmp_bits = bmp_data + bmp_file_header->bfOffBits;
 
@@ -548,8 +550,8 @@ MainWindowProc( HWND handle, UINT message, WPARAM wp, LPARAM lp )
                         TILMI_ERROR_CLEANUP(TILMI_STR_ERR_TMI_OUT, mode2_clean_til);
 
                     DWORD size_io = 0;
-                    WriteFile(tmi_out, &(uint16_t){ map_width }, 2, &size_io, NULL);
-                    WriteFile(tmi_out, &(uint16_t){ map_height }, 2, &size_io, NULL);
+                    WriteFile(tmi_out, &map_width, 2, &size_io, NULL);
+                    WriteFile(tmi_out, &map_height, 2, &size_io, NULL);
 
                     Vector unique_tils = Vector_Create(sizeof(TilPixels));
 
@@ -769,19 +771,18 @@ MainWindowProc( HWND handle, UINT message, WPARAM wp, LPARAM lp )
                     // Record all til blocks
                     while (true)
                     {
-                        uint32_t til_block_size = 0;
-                        CopyMemory(&til_block_size, til_data_ptr, 4);
-                        if (!til_block_size)
+                        uint32_t *til_block_size = (uint32_t *) til_data_ptr;
+                        if (!til_block_size || !(*til_block_size))
                             break;
                         TilPixels til_block;
                         TilDataToPixels(til_data_ptr, &til_block);
 
                         Vector_Push(&unique_tils, &til_block);
-                        til_data_ptr += til_block_size + 4;
+                        til_data_ptr += *til_block_size + 4;
                     }
 
-                    int32_t map_width = 0;
-                    int32_t map_height = 0;
+                    int16_t map_width = 0;
+                    int16_t map_height = 0;
 
                     DWORD size_io = 0;
                     ReadFile(tmi_in, &map_width, 2, &size_io, NULL);

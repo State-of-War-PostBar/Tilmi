@@ -3,7 +3,8 @@
     <assemblyIdentity
         type="win32"
         name="SOWPostBar.Tilmi"
-        version="2.2.0.0"
+        processorArchitecture="amd64"
+        version="3.0.0.0"
     />
     <dependency>
         <dependentAssembly>

@@ -1,12 +1,12 @@
 注：Windows 10以下系统运行此程序需要UCRT.
 (https://support.microsoft.com/zh-cn/topic/update-for-universal-c-runtime-in-windows-322bf30f-4735-bb94-3949-49f5c49f4732)
 
-Beta 1.2版本更新：
-    - 修复了负高度bmp处理不正常的问题
+正式版1.0更新：
+    - 修复负高度bmp处理不正常的问题
 
 ---------------------------------
 
-什么是til/tmi?
+til/tmi是什么?
 
 蓝警Levels文件夹下的Mxx.til和Mxx.tmi文件定义该地图中单位不可见的、被遮挡住的区域，比如树，德克萨斯和澳大利亚的建筑等...
 遮挡只对单位和炮塔的上半部分有效，游戏建筑物和炮塔底座无视任何遮挡。

@@ -5,7 +5,7 @@
 **************************************************************************************************
 *                                                                                                *
 *                     A tool for creating State of War's til and tmi files.                      *
-*               (ɔ) 2017 - 2022 State of War Baidu Postbar, some rights reserved.                *
+*               (ɔ) 2017 - 2022 State of War Baidu PostBar, some rights reserved.                *
 *                                                                                                *
 *             Tilmi is a free software. You can freely do whatever you want with it              *
 *     under the JUST DON'T BOTHER ME PUBLIC LICENSE (hereinafter referred to as the license)     *
@@ -42,12 +42,12 @@
 // |       4  |         2      |  Width of current block, always 32 in til     <---------------------------
 // |       6  |         2      |  Height of current block, always 32 in til                               |
 // |       8  |        12      |  A bunch of .tsp constants, unknown usage                                |
-// |      20  | 4 * map height | Offset to the data of the scanline at that height divided by 2           |
+// |      20  |      4 * 32    | Offset to the data of the scanline at that height divided by 2           |
 //                               This offset starts counting at -------------------------------------------
-//                               Use this offset to find the beginning of scanline data.
+//                               Use this offset to find the beginning of scanline data
 //
 // The scanline data uses some sort of alternating run-length encoding, identical to tsp files.
-// Only difference is that all of til's data are monochrome (1 or 0).
+// Only difference is that all of til's data are monochrome (1 or 0). That is, no color data is included.
 // The first integer marks the total alternation of the scanline.
 // The second integer marks if the first pixel is invisible. (1 for covering units, 0 for not covering)
 // Then the RLE begins. 
@@ -63,7 +63,10 @@
 // So we'll have to reverse that when converting bmp into til.
 
 // Theoretically, it is possible to set the size of one til block to fill the entire srf, and use a single index in tmi.
-// Haven't test it yet...
+// But it's better to stick with how SOW deals with til/tmi.
+
+// Tmi file is like a [dictionary] for til blocks.
+// All the til blocks in a til file forms a list, and tmi uses the index of those blocks in the list to fill up the srf masking.
 
 // =======================================================================================================================
 
@@ -85,13 +88,13 @@ bool
 CompareTilBlock( const TilPixels *lhs, const TilPixels *rhs );
 
 ///
-/// Compress pixels to til data. This function set a pointer to a static buffer containing til data
-/// as the second argument.
+/// Compress pixels to til data. This function gives a pointer to a static buffer containing til data
+/// by the second argument.
 ///
 /// \param block 32 * 32 block of pixels
 /// \param output Address of pointer to receive output buffer address
 ///
-/// \return The actual size of compressed til data in bytes
+/// \return The size of compressed til data in bytes, including 4 bytes size header
 ///
 size_t
 PixelsToTilData( const TilPixels *block, unsigned char **output );
@@ -99,7 +102,7 @@ PixelsToTilData( const TilPixels *block, unsigned char **output );
 ///
 /// Decompress til data to pixels.
 ///
-/// \param til_data A til data block. Must be at least 4 bytes
+/// \param til_data A til data block. Must be at least 336 bytes
 /// \param output Pointer to a pixels buffer for output
 ///
 void

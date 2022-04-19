@@ -5,7 +5,7 @@
 **************************************************************************************************
 *                                                                                                *
 *                     A tool for creating State of War's til and tmi files.                      *
-*               (ɔ) 2017 - 2022 State of War Baidu Postbar, some rights reserved.                *
+*               (ɔ) 2017 - 2022 State of War Baidu PostBar, some rights reserved.                *
 *                                                                                                *
 *             Tilmi is a free software. You can freely do whatever you want with it              *
 *     under the JUST DON'T BOTHER ME PUBLIC LICENSE (hereinafter referred to as the license)     *
@@ -28,6 +28,7 @@
 
 #include <pch.h>
 
+/// Language codes
 typedef enum
 {
     TILMI_EN_US = 1,
@@ -36,11 +37,10 @@ typedef enum
     TILMI_LANG_END
 } TilmiLanguage;
 
+/// Index for string resources
 typedef enum
 {
-    TILMI_STR_INVALID = 0,
-
-    TILMI_STR_TXT_NOTICE,
+    TILMI_STR_TXT_NOTICE = 1,
 
     TILMI_STR_MODE1_GROUPBOX,
     TILMI_STR_MODE1_TXT_MAP_WIDTH,

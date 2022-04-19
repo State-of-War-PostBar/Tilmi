@@ -5,7 +5,7 @@
 **************************************************************************************************
 *                                                                                                *
 *                     A tool for creating State of War's til and tmi files.                      *
-*               (ɔ) 2017 - 2022 State of War Baidu Postbar, some rights reserved.                *
+*               (ɔ) 2017 - 2022 State of War Baidu PostBar, some rights reserved.                *
 *                                                                                                *
 *             Tilmi is a free software. You can freely do whatever you want with it              *
 *     under the JUST DON'T BOTHER ME PUBLIC LICENSE (hereinafter referred to as the license)     *
@@ -25,8 +25,8 @@
 
 #include "til.h"
 
-// The first two pair of integers are width and height of the til data.
-// Followed by three pairs of til data with unknown usage, starting at offset 0x08.
+// The first two pair of integers are width and height of the til data, and they are always 32.
+// Followed by three pairs of integers with unknown usage, starting at offset 8.
 // They are always 0, 0, 32, 32, 0, 0. Seems like having to do with tsp.
 static const uint16_t TIL_TSP_CONSTANT[8] = { 32, 32, 0, 0, 32, 32, 0, 0 };
 
@@ -43,7 +43,7 @@ PixelsToTilData( const TilPixels *block, unsigned char **output )
     // The size is the largest size possible for a 32 * 32 block in til form
     static unsigned char til_data[4 + 2 * 2 + 3 * 2 * 2 + 32 * 4 + 32 * (2 + 2 + 32 * 2)];
 
-    // Pointer for scanlines
+    // Pointer for data
     unsigned char *ptr = til_data + 4;
 
     // Add til's tsp constants

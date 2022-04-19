@@ -1,15 +1,15 @@
 Note: For systems eariler than Windows 10 to run this program you need UCRT.
 (https://support.microsoft.com/en-us/topic/update-for-universal-c-runtime-in-windows-322bf30f-4735-bb94-3949-49f5c49f4732)
 
-Beta 1.2 Update:
-    - Fixes a bug that screws up negative height bmp
+1.0 Update:
+    - Fixes a bug that screws up negative height bmps
 
 ---------------------------------
 
 What are til and tmi?
 
 Mxx.til and Mxx.tmi files under the Data/Levels folder defines the invisible areas of units of the map.
-Part of unit's sprites in such area will be invisible, it will "cover" unit.
+Part of unit's sprites in such area will be invisible, like it "covers" unit.
 For examples, trees, and the large buildings of M04, M10, M22...
 Notice that this invisibility does not work on buildings and bottom parts of turrets.
 This program helps creating til/tmi files. There are 3 modes available for this program...
@@ -30,12 +30,12 @@ Tmi file will be created with the same file name of til, and will override exist
 
 Mode 2: With invisibilities
 
-Convert a masking bmp to til/tmi.
+Convert a bmp to til/tmi.
 
 How to create unit invisibilities:
 Create an UNCOMPRESSED, 1 BIT MONORCHROME bmp image with resolution same as the srf of the map.
 For original SOW, small maps are 2048 * 2048 and large maps are 3072 * 2560.
-If using non-standard srf sizes, make the dimensions match 32 * the dimension of the map size.
+If you are using non-standard srf sizes, make the dimensions match 32 * the dimensions of the map size.
 For example, a map with size 80 * 80 would need srf and til/tmi with size 2560 * 2560.
 Make sure the dimensions of the bmp picture are multiples of 32, and no larger than 4064.
 Then fill in the pixels you want units to be invisible. All the visible pixels should be white.
@@ -46,7 +46,7 @@ Then fill in the pixels you want units to be invisible. All the visible pixels s
 For exmaple:
 Open the background picture of the map with image editors that support layers. Create a transparent layer for the masking.
 Use pencil or magic wand to circle around objects that will cover units/turrets, and fill in whatever color.
-When done, export the masking layer to a png and open with Microsoft Paint.
+When done, export the masking layer to a png and open it with Microsoft Paint.
 Export the image as "Monochrome bmp".
 And then you can use it in this program.
 Be sure to backup the original til/tmi.
@@ -71,4 +71,4 @@ If you have any questions ask me at discord!
 Source repository <github.com/State-of-War-PostBar/Tilmi>
 Made by Taxerap <github.com/Taxerap>
 Thank NafMaxYang for bmp examples and testing
-Thank -RedImitate.- for Windows 11 & Windows 7 testing
+Thank -RedImitate.Foul- for Windows 11 & Windows 7 testing
