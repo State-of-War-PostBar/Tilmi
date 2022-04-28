@@ -23,20 +23,9 @@
 *                                                                                                *
 **************************************************************************************************/
 
-#include "lang.h"
+#include "map.h"
 
-/// String resources pointers
-static const TCHAR *tilmi_strings[TILMI_STR_ENUM_END];
-
-void
-LoadTilmiStrings( HINSTANCE instance, TilmiLanguage language )
-{
-    for (size_t i = 1; i < TILMI_STR_ENUM_END; i++)
-        LoadString(instance, 100 * language + i, (LPTCH) &(tilmi_strings[i]), 0);
-}
-
-const TCHAR *const
-GetTilmiString( TilmiStringID str )
-{
-    return tilmi_strings[str];
-}
+const uint8_t TILMI_MAP_HEADER[5] = { 0x04, 0x56, 0x45, 0x52, 0x37 };
+const uint8_t TILMI_MAP_FILLER[8] = { 0 };
+const uint8_t TILMI_MAP_ALL_CLEAR[15] = { 0 };
+const uint8_t TILMI_MAP_ALL_REJECT[15] = { 0xfd, 0xff, 0xff, 0x00, 0xfd, 0xff, 0xff, 0x00 };

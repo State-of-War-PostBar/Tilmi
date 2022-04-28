@@ -38,5 +38,5 @@ BitsToBytes( const unsigned char bits[static 4], unsigned char bytes[static 32] 
 {
     for (unsigned int i = 0; i < 4; i++)
         for (unsigned int j = 0; j < 8; j++)
-            bytes[i * 8 + j] = !!(bits[i] & (1 << j));
+            bytes[i * 8 + j] = !!(bits[i] & (1 << (7 - j)));
 }

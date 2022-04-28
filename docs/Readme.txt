@@ -2,7 +2,8 @@ Note: For systems eariler than Windows 10 to run this program you need UCRT.
 (https://support.microsoft.com/en-us/topic/update-for-universal-c-runtime-in-windows-322bf30f-4735-bb94-3949-49f5c49f4732)
 
 1.0 Update:
-    - Fixes a bug that screws up negative height bmps
+    - Fixed a bug that messes up negative height bmps
+    - Added a mode to create .map templates
 
 ---------------------------------
 
@@ -12,23 +13,22 @@ Mxx.til and Mxx.tmi files under the Data/Levels folder defines the invisible are
 Part of unit's sprites in such area will be invisible, like it "covers" unit.
 For examples, trees, and the large buildings of M04, M10, M22...
 Notice that this invisibility does not work on buildings and bottom parts of turrets.
-This program helps creating til/tmi files. There are 3 modes available for this program...
+This program helps create til/tmi files from visible images. There are 4 modes available for this program...
 
 ---------------------------------
 
-Mode 1: No invisibility
+Mode 1: Create empty til/tmi
 
 Create a blank til/tmi template without any unit invisibility at all.
-You need to specify the width and height of the map.
-Map's width and height need to be 1 ~ 127.
-For original SOW, large maps (M10, M22) are 96 * 80, and small maps (M12, M14) are 64 * 64.
+You need to specify the width and height of the map. Map's width and height need to be 1 ~ 127.
+For more explanisions on map sizes, see the attached image.
 
 Note: When outputing, the program asks you for til's file path, but will not ask you for tmi's path.
 Tmi file will be created with the same file name of til, and will override existing same-named tmi file without prompting, if that exists.
 
 ---------------------------------
 
-Mode 2: With invisibilities
+Mode 2: Create til/tmi with invisibilities
 
 Convert a bmp to til/tmi.
 
@@ -63,6 +63,14 @@ It is recommended to convert the output image to other formats (like png) before
 
 Note: The program does not check til/tmi integrity, it only checks if the tmi matches the til.
 If you feed in broken til/tmi and they somehow happened to match, the program will still run but produce garbage.
+
+---------------------------------
+
+Mode 4: Create empty map
+
+Create a blank .map file with specific size.
+Note that the edges of the map are all unusable.
+See attached image for details on map sizes.
 
 ---------------------------------
 

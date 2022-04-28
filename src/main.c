@@ -27,6 +27,7 @@
 
 #include "bmp.h"
 #include "lang.h"
+#include "map.h"
 #include "til.h"
 #include "vector.h"
 
@@ -44,7 +45,7 @@ static int res_width, res_height;
 static HANDLE icon_sow;
 static HANDLE cursor_arrow;
 
-static HFONT ui_font[TILMI_LANG_END];
+static HFONT ui_font[TILMI_LANG_ENUM_END];
 
 LRESULT
 CALLBACK
@@ -167,8 +168,8 @@ LanguageWindowProc( HWND handle, UINT message, WPARAM wp, LPARAM lp )
             CreateWindow(TEXT("MainWindow"),
                          TEXT("Tilmi"),
                          WS_OVERLAPPEDWINDOW | WS_VISIBLE,
-                         (res_width - 500) / 2, (res_height - 650) / 2,
-                         500, 650,
+                         (res_width - 500) / 2, (res_height - 760) / 2,
+                         500, 760,
                          NULL,
                          NULL,
                          program_instance,
@@ -215,6 +216,8 @@ MainWindowProc( HWND handle, UINT message, WPARAM wp, LPARAM lp )
         BTN_MODE3_TMI_SELECT,
         BTN_MODE3_CONVERT,
 
+        BTN_MODE4_GENERATE,
+
         BTN_EXIT
     };
 
@@ -230,6 +233,11 @@ MainWindowProc( HWND handle, UINT message, WPARAM wp, LPARAM lp )
     static HWND edit_mode3_til, edit_mode3_tmi;
     static HWND button_mode3_til_select, button_mode3_tmi_select;
     static HWND button_mode3_convert;
+
+    static HWND groupbox_mode4;
+    static HWND edit_mode4_map_width, edit_mode4_map_height;
+    static HWND button_mode4_generate;
+
     static HWND button_exit;
 
     switch (message)
@@ -251,7 +259,7 @@ MainWindowProc( HWND handle, UINT message, WPARAM wp, LPARAM lp )
                                                  WS_CHILD | WS_VISIBLE | WS_BORDER | ES_CENTER | ES_NUMBER,
                                                  300, 85, 50, 24, handle, 0, program_instance, NULL);
             button_mode1_generate = CreateWindow(TEXT("BUTTON"),
-                                                 GetTilmiString(TILMI_STR_MODE1_BTN_GENERATE),
+                                                 GetTilmiString(TILMI_STR_MODE1N4_BTN_GENERATE),
                                                  WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON,
                                                  360, 85, 100, 24, handle, (HMENU) BTN_MODE1_GENERATE, program_instance, NULL);
 
@@ -269,7 +277,7 @@ MainWindowProc( HWND handle, UINT message, WPARAM wp, LPARAM lp )
                                                WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON,
                                                400, 224, 50, 24, handle, (HMENU) BTN_MODE2_BMP_SELECT, program_instance, NULL);
             button_mode2_convert = CreateWindow(TEXT("BUTTON"),
-                                               GetTilmiString(TILMI_STR_MODE2AND3_BTN_CONVERT),
+                                               GetTilmiString(TILMI_STR_MODE2N3_BTN_CONVERT),
                                                WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON,
                                                170, 270, 150, 40, handle, (HMENU) BTN_MODE2_CONVERT, program_instance, NULL);
 
@@ -294,14 +302,32 @@ MainWindowProc( HWND handle, UINT message, WPARAM wp, LPARAM lp )
                                       WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON,
                                       400, 472, 50, 24, handle, (HMENU) BTN_MODE3_TMI_SELECT, program_instance, NULL);
             button_mode3_convert = CreateWindow(TEXT("BUTTON"),
-                                               GetTilmiString(TILMI_STR_MODE2AND3_BTN_CONVERT),
+                                               GetTilmiString(TILMI_STR_MODE2N3_BTN_CONVERT),
                                                WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON,
                                                170, 507, 150, 40, handle, (HMENU) BTN_MODE3_CONVERT, program_instance, NULL);
+
+            groupbox_mode4 = CreateWindow(TEXT("BUTTON"),
+                                          GetTilmiString(TILMI_STR_MODE4_GROUPBOX),
+                                          WS_CHILD | WS_VISIBLE | BS_GROUPBOX,
+                                          10, 570, 465, 100, handle, 0, program_instance, NULL);
+            edit_mode4_map_width = CreateWindow(TEXT("EDIT"),
+                                                TEXT(""),
+                                                WS_CHILD | WS_VISIBLE | WS_BORDER | ES_CENTER | ES_NUMBER,
+                                                120, 620, 50, 24, handle, 0, program_instance, NULL);
+            edit_mode4_map_height = CreateWindow(TEXT("EDIT"),
+                                                TEXT(""),
+                                                WS_CHILD | WS_VISIBLE | WS_BORDER | ES_CENTER | ES_NUMBER,
+                                                300, 620, 50, 24, handle, 0, program_instance, NULL);
+            button_mode4_generate = CreateWindow(TEXT("BUTTON"),
+                                                GetTilmiString(TILMI_STR_MODE1N4_BTN_GENERATE),
+                                                WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON,
+                                                360, 620, 100, 24, handle, (HMENU) BTN_MODE4_GENERATE, program_instance, NULL);
+
 
             button_exit = CreateWindow(TEXT("BUTTON"),
                                        GetTilmiString(TILMI_STR_BTN_EXIT),
                                        WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON,
-                                       370, 570, 105, 30, handle, (HMENU) BTN_EXIT, program_instance, NULL);
+                                       370, 680, 105, 30, handle, (HMENU) BTN_EXIT, program_instance, NULL);
 
             // Set controls' font
             SendMessage(groupbox_mode1, WM_SETFONT, (WPARAM) ui_font[chosen_language], TRUE);
@@ -321,6 +347,11 @@ MainWindowProc( HWND handle, UINT message, WPARAM wp, LPARAM lp )
             SendMessage(button_mode3_tmi_select, WM_SETFONT, (WPARAM) ui_font[chosen_language], TRUE);
             SendMessage(button_mode3_convert, WM_SETFONT, (WPARAM) ui_font[chosen_language], TRUE);
 
+            SendMessage(groupbox_mode4, WM_SETFONT, (WPARAM) ui_font[chosen_language], TRUE);
+            SendMessage(edit_mode4_map_width, WM_SETFONT, (WPARAM) ui_font[chosen_language], TRUE);
+            SendMessage(edit_mode4_map_height, WM_SETFONT, (WPARAM) ui_font[chosen_language], TRUE);
+            SendMessage(button_mode4_generate, WM_SETFONT, (WPARAM) ui_font[chosen_language], TRUE);
+
             SendMessage(button_exit, WM_SETFONT, (WPARAM) ui_font[chosen_language], TRUE);
             return 0;
 
@@ -337,15 +368,18 @@ MainWindowProc( HWND handle, UINT message, WPARAM wp, LPARAM lp )
             DrawText(dc, GetTilmiString(TILMI_STR_TXT_NOTICE), -1, &(RECT){ 10, 10, 490, 30 }, DT_CENTER | DT_VCENTER | DT_SINGLELINE);
 
             SetTextColor(dc, RGB(0, 0, 0));
-            DrawText(dc, GetTilmiString(TILMI_STR_MODE1_TXT_MAP_WIDTH), -1, &(RECT){ 30, 85, 150, 109 }, DT_LEFT | DT_VCENTER | DT_SINGLELINE);
-            DrawText(dc, GetTilmiString(TILMI_STR_MODE1_TXT_MAP_HEIGHT), -1, &(RECT){ 200, 85, 320, 109 }, DT_LEFT | DT_VCENTER | DT_SINGLELINE);
+            DrawText(dc, GetTilmiString(TILMI_STR_MODE1N4_TXT_MAP_WIDTH), -1, &(RECT){ 30, 85, 150, 109 }, DT_LEFT | DT_VCENTER | DT_SINGLELINE);
+            DrawText(dc, GetTilmiString(TILMI_STR_MODE1N4_TXT_MAP_HEIGHT), -1, &(RECT){ 200, 85, 320, 109 }, DT_LEFT | DT_VCENTER | DT_SINGLELINE);
 
             DrawText(dc, GetTilmiString(TILMI_STR_MODE2_BMP_FILEPATH), -1, &(RECT){ 30, 190, 300, 214 }, DT_LEFT | DT_VCENTER | DT_SINGLELINE);
 
             DrawText(dc, GetTilmiString(TILMI_STR_MODE3_TXT_TIL_FILEPATH), -1, &(RECT){ 30, 370, 300, 394 }, DT_LEFT | DT_VCENTER | DT_SINGLELINE);
             DrawText(dc, GetTilmiString(TILMI_STR_MODE3_TXT_TMI_FILEPATH), -1, &(RECT){ 30, 438, 300, 462 }, DT_LEFT | DT_VCENTER | DT_SINGLELINE);
 
-            DrawText(dc, GetTilmiString(TILMI_STR_TXT_VERSION), -1, &(RECT){ 10, 570, 490, 600 }, DT_LEFT | DT_VCENTER | DT_SINGLELINE);
+            DrawText(dc, GetTilmiString(TILMI_STR_MODE1N4_TXT_MAP_WIDTH), -1, &(RECT){ 30, 620, 150, 644 }, DT_LEFT | DT_VCENTER | DT_SINGLELINE);
+            DrawText(dc, GetTilmiString(TILMI_STR_MODE1N4_TXT_MAP_HEIGHT), -1, &(RECT){ 200, 620, 320, 644 }, DT_LEFT | DT_VCENTER | DT_SINGLELINE);
+
+            DrawText(dc, GetTilmiString(TILMI_STR_TXT_VERSION), -1, &(RECT){ 10, 680, 490, 710 }, DT_LEFT | DT_VCENTER | DT_SINGLELINE);
 
             SelectObject(dc, old_font);
 
@@ -592,20 +626,9 @@ MainWindowProc( HWND handle, UINT message, WPARAM wp, LPARAM lp )
                                 :
                                     current_block - length_per_width * hp;
 
-                                unsigned char current_line_pixels[4];
+                                unsigned char current_line_pixels[4] = { 0 };
                                 CopyMemory(current_line_pixels, current_line, 4);
-
-                                for (unsigned char i = 0; i < 4; i++)
-                                {
-                                    current_block_pixels.pixels[hp][0 + 8 * i] = !!(current_line_pixels[i] & 0x80);
-                                    current_block_pixels.pixels[hp][1 + 8 * i] = !!(current_line_pixels[i] & 0x40);
-                                    current_block_pixels.pixels[hp][2 + 8 * i] = !!(current_line_pixels[i] & 0x20);
-                                    current_block_pixels.pixels[hp][3 + 8 * i] = !!(current_line_pixels[i] & 0x10);
-                                    current_block_pixels.pixels[hp][4 + 8 * i] = !!(current_line_pixels[i] & 0x08);
-                                    current_block_pixels.pixels[hp][5 + 8 * i] = !!(current_line_pixels[i] & 0x04);
-                                    current_block_pixels.pixels[hp][6 + 8 * i] = !!(current_line_pixels[i] & 0x02);
-                                    current_block_pixels.pixels[hp][7 + 8 * i] = !!(current_line_pixels[i] & 0x01);
-                                }
+                                BitsToBytes(current_line_pixels, current_block_pixels.pixels[hp]);
                             }
 
                             // Check if til block already exists
@@ -861,6 +884,78 @@ MainWindowProc( HWND handle, UINT message, WPARAM wp, LPARAM lp )
                 mode3_clean_til:
                     CloseHandle(til_in);
                 mode3_clean_end:
+
+                    if (success)
+                        MessageBox(handle, GetTilmiString(TILMI_STR_TXT_DONE), GetTilmiString(TILMI_STR_MBTITLE_OK), MB_OK);
+                    return 0;
+                }
+
+                case BTN_MODE4_GENERATE:
+                {
+                    bool success = true;
+
+                    TCHAR map_width_str[5], map_height_str[5];
+                    GetWindowText(edit_mode4_map_width, map_width_str, 4);
+                    GetWindowText(edit_mode4_map_height, map_height_str, 4);
+
+                    int32_t map_width = StrToInt(map_width_str);
+                    int32_t map_height = StrToInt(map_height_str);
+
+                    // Map dimensions need to be 1 ~ 127
+                    if (map_width < 1 || map_width > 127 || map_height < 1 || map_height > 127)
+                        TILMI_ERROR_CLEANUP(TILMI_STR_ERR_INVALID_MAP_WIDTH_HEIGHT, mode1_clean_end);
+
+                    TCHAR file_name[256] = { '\0' };
+
+                    OPENFILENAME ofn =
+                    {
+                        .lStructSize = sizeof(OPENFILENAME),
+                        .hwndOwner = handle,
+                        .hInstance = NULL,
+                        .lpstrFilter = GetTilmiString(TILMI_STR_FILTER_MAP),
+                        .nFilterIndex = 0,
+                        .lpstrCustomFilter = NULL,
+                        .nMaxCustFilter = 0,
+                        .nMaxFile = 256,
+                        .lpstrFile = file_name,
+                        .lpstrFileTitle = NULL,
+                        .lpstrInitialDir = NULL,
+                        .lpstrTitle = GetTilmiString(TILMI_STR_TXT_SELECT_MAP_OUT),
+                        .lpstrDefExt = TEXT("map"),
+                        .Flags = OFN_OVERWRITEPROMPT
+                    };
+
+                    if (!GetSaveFileName(&ofn))
+                        TILMI_CHECK_FP_TOOLONG_CLEANUP(mode4_clean_end);
+
+                    HANDLE map_out = CreateFile(file_name, GENERIC_WRITE, 0, NULL, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
+                    if (map_out == INVALID_HANDLE_VALUE)
+                        TILMI_ERROR_CLEANUP(TILMI_STR_ERR_MAP_OUT, mode4_clean_end);
+
+                    DWORD size_io = 0;
+
+                    // .map header
+                    WriteFile(map_out, TILMI_MAP_HEADER, 5, &size_io, NULL);
+                    WriteFile(map_out, TILMI_MAP_FILLER, 8, &size_io, NULL);
+
+                    // Width and height of map
+                    WriteFile(map_out, &map_width, 4, &size_io, NULL);
+                    WriteFile(map_out, &map_height, 4, &size_io, NULL);
+
+                    for (uint8_t h = 0; h < map_height; h++)
+                        for (uint8_t w = 0; w < map_width; w++)
+                        {
+                            // Write current tile information
+                            WriteFile(map_out, &h, 1, &size_io, NULL);
+                            WriteFile(map_out, &w, 1, &size_io, NULL);
+                            WriteFile(map_out, (h == 0 || h == map_height - 1 || w == 0 || w == map_width - 1) ? TILMI_MAP_ALL_REJECT : TILMI_MAP_ALL_CLEAR, 15, &size_io, NULL);
+                        }
+
+                    // 5 bytes of EOF mark
+                    WriteFile(map_out, TILMI_MAP_FILLER, 5, &size_io, NULL);
+                    CloseHandle(map_out);
+
+                mode4_clean_end:
 
                     if (success)
                         MessageBox(handle, GetTilmiString(TILMI_STR_TXT_DONE), GetTilmiString(TILMI_STR_MBTITLE_OK), MB_OK);

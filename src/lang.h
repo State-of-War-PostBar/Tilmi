@@ -34,7 +34,7 @@ typedef enum
     TILMI_EN_US = 1,
     TILMI_ZH_SP,
 
-    TILMI_LANG_END
+    TILMI_LANG_ENUM_END
 } TilmiLanguage;
 
 /// Index for string resources
@@ -43,17 +43,19 @@ typedef enum
     TILMI_STR_TXT_NOTICE = 1,
 
     TILMI_STR_MODE1_GROUPBOX,
-    TILMI_STR_MODE1_TXT_MAP_WIDTH,
-    TILMI_STR_MODE1_TXT_MAP_HEIGHT,
-    TILMI_STR_MODE1_BTN_GENERATE,
+    TILMI_STR_MODE1N4_TXT_MAP_WIDTH,
+    TILMI_STR_MODE1N4_TXT_MAP_HEIGHT,
+    TILMI_STR_MODE1N4_BTN_GENERATE,
 
     TILMI_STR_MODE2_GROUPBOX,
     TILMI_STR_MODE2_BMP_FILEPATH,
-    TILMI_STR_MODE2AND3_BTN_CONVERT,
+    TILMI_STR_MODE2N3_BTN_CONVERT,
 
     TILMI_STR_MODE3_GROUPBOX,
     TILMI_STR_MODE3_TXT_TIL_FILEPATH,
     TILMI_STR_MODE3_TXT_TMI_FILEPATH,
+
+    TILMI_STR_MODE4_GROUPBOX,
 
     TILMI_STR_TXT_VERSION,
     TILMI_STR_BTN_EXIT,
@@ -61,6 +63,7 @@ typedef enum
     TILMI_STR_FILTER_TIL,
     TILMI_STR_FILTER_TMI,
     TILMI_STR_FILTER_BMP,
+    TILMI_STR_FILTER_MAP,
 
     TILMI_STR_TXT_SELECT_TIL_IN,
     TILMI_STR_TXT_SELECT_TIL_OUT,
@@ -68,6 +71,7 @@ typedef enum
     TILMI_STR_TXT_SELECT_TMI_OUT,
     TILMI_STR_TXT_SELECT_BMP_IN,
     TILMI_STR_TXT_SELECT_BMP_OUT,
+    TILMI_STR_TXT_SELECT_MAP_OUT,
 
     TILMI_STR_MBTITLE_OK,
 
@@ -81,6 +85,7 @@ typedef enum
     TILMI_STR_ERR_TMI_OUT,
     TILMI_STR_ERR_BMP_IN,
     TILMI_STR_ERR_BMP_OUT,
+    TILMI_STR_ERR_MAP_OUT,
     TILMI_STR_ERR_FP_TOOLONG,
 
     TILMI_STR_ERR_INVALID_MAP_WIDTH_HEIGHT,
@@ -94,9 +99,22 @@ typedef enum
     TILMI_STR_ENUM_END
 } TilmiStringID;
 
+///
+/// Load string resources from the executable.
+///
+/// \param instance Program's instance
+/// \param language Language code
+///
 void
 LoadTilmiStrings( HINSTANCE instance, TilmiLanguage language );
 
+///
+/// Retreive a translation string.
+///
+/// \param str String ID
+///
+/// \return Pointer to that string. Notice that we need to feed a \0 terminator in every string resources
+///
 const TCHAR *const
 GetTilmiString( TilmiStringID str );
 

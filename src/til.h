@@ -30,7 +30,7 @@
 
 // ==========================================  Description of til and tmi file  ==========================================
 
-//              Don't try to read it too hard, I'm making a better documentation.   -- Taxerap
+//                     Don't try to read it too hard, I made a better documentation.   -- Taxerap
 
 // Til file is basically a [set] of many til blocks.
 // Each til block is a 32 * 32 monochrome bitmap.
@@ -61,8 +61,8 @@
 // Notice that SOW uses 1 for invisible pixel, 0 for visible pixel.
 // But we use black (0) pixel for invisible and white (1) for visible when dealing with bmp images.
 // So we'll have to reverse that when converting bmp into til.
-
-// Theoretically, it is possible to set the size of one til block to fill the entire srf, and use a single index in tmi.
+//
+// Note: Theoretically, it is possible to set the size of one til block to fill the entire srf, and use a single index in tmi.
 // But it's better to stick with how SOW deals with til/tmi.
 
 // Tmi file is like a [dictionary] for til blocks.
@@ -77,7 +77,7 @@ typedef struct
 } TilPixels;
 
 ///
-/// Compare two til blocks to check if they are equal. Used to feed into compare function of containers.
+/// Compare two til blocks to check if they are equal. Feed this into compare function of containers.
 ///
 /// \param lhs First til block
 /// \param rhs Second til block

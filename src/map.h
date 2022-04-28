@@ -23,20 +23,25 @@
 *                                                                                                *
 **************************************************************************************************/
 
-#include "lang.h"
+#ifndef TILMI_MAP_H
+#define TILMI_MAP_H
 
-/// String resources pointers
-static const TCHAR *tilmi_strings[TILMI_STR_ENUM_END];
+#include <pch.h>
 
-void
-LoadTilmiStrings( HINSTANCE instance, TilmiLanguage language )
-{
-    for (size_t i = 1; i < TILMI_STR_ENUM_END; i++)
-        LoadString(instance, 100 * language + i, (LPTCH) &(tilmi_strings[i]), 0);
-}
+/// Header of .map file. Constants.
+extern const uint8_t TILMI_MAP_HEADER[5];
 
-const TCHAR *const
-GetTilmiString( TilmiStringID str )
-{
-    return tilmi_strings[str];
-}
+/// Two 32-bit word with unknown usage. DK said it's the position of the camera when game starts.
+/// SOW seems to be changing them when loading. Not a concern of our program anyways, so all null.
+extern const uint8_t TILMI_MAP_FILLER[8];
+
+/// Signature for a tile that allow all entities to cross.
+extern const uint8_t TILMI_MAP_ALL_CLEAR[15];
+
+/// Signature for a tile that allow no entity to cross. Use as map border.
+extern const uint8_t TILMI_MAP_ALL_REJECT[15];
+
+/// After all the tiles are defined, we need 5 bytes of null to mark the end of file.
+/// Just use 5 bytes from TILMI_MAP_FILLER.
+
+#endif // !TILMI_MAP_H
