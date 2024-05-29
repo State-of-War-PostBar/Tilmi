@@ -7,7 +7,7 @@ CREATEPROCESS_MANIFEST_RESOURCE_ID RT_MANIFEST "tilmi.manifest"
 #include "winver.h"
 
 1 VERSIONINFO
-FILEVERSION    3, 0, 0, 0
+FILEVERSION    3, 1, 0, 0
 BEGIN
     BLOCK "StringFileInfo"
     BEGIN
@@ -16,12 +16,12 @@ BEGIN
             VALUE "Comments", "Makes State of War til/tmi resources"
             VALUE "CompanyName", "State of War PostBar"
             VALUE "FileDescription", "Tilmi"
-            VALUE "FileVersion", "3.0.0.0"
+            VALUE "FileVersion", "3.1.0.0"
             VALUE "InternalName", "tilmi"
             VALUE "LegalCopyright", "JDBMPL @ State of War PostBar"
             VALUE "OriginalFilename", "tilmi.exe"
             VALUE "ProductName", "Tilmi"
-            VALUE "ProductVersion", "1.0"
+            VALUE "ProductVersion", "1.1"
     END
 END
 BLOCK "VarFileInfo"

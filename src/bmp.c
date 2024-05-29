@@ -5,7 +5,7 @@
 **************************************************************************************************
 *                                                                                                *
 *                     A tool for creating State of War's til and tmi files.                      *
-*               (ɔ) 2017 - 2022 State of War Baidu PostBar, some rights reserved.                *
+*               (ɔ) 2022 - 2024 State of War Baidu PostBar, some rights reserved.                *
 *                                                                                                *
 *             Tilmi is a free software. You can freely do whatever you want with it              *
 *     under the JUST DON'T BOTHER ME PUBLIC LICENSE (hereinafter referred to as the license)     *
@@ -28,6 +28,7 @@
 void
 BytesToBits( const unsigned char bytes[static 32], unsigned char bits[static 4] )
 {
+    memset(bits, 0, 4);
     for (unsigned int i = 0; i < 4; i++)
         for (unsigned int j = 0; j < 8; j++)
             bits[i] |= bytes[8 * i + j] ? (1 << (7 - j)) : 0;

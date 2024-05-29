@@ -5,7 +5,7 @@
 **************************************************************************************************
 *                                                                                                *
 *                     A tool for creating State of War's til and tmi files.                      *
-*               (ɔ) 2017 - 2022 State of War Baidu PostBar, some rights reserved.                *
+*               (ɔ) 2022 - 2024 State of War Baidu PostBar, some rights reserved.                *
 *                                                                                                *
 *             Tilmi is a free software. You can freely do whatever you want with it              *
 *     under the JUST DON'T BOTHER ME PUBLIC LICENSE (hereinafter referred to as the license)     *
@@ -30,7 +30,7 @@
 
 // ==========================================  Description of til and tmi file  ==========================================
 
-//                     Don't try to read it too hard, I made a better documentation.   -- Taxerap
+//                     Don't try to read it, I made a better documentation, see docs/.   -- Taxerap
 
 // Til file is basically a [set] of many til blocks.
 // Each til block is a 32 * 32 monochrome bitmap.

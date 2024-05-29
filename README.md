@@ -18,4 +18,4 @@ Tilmi is published under the _Just Don't Bother Me Public License_ by [mhtvsSFrp
 
 ---
 
-_Tilmi, State of War PostBar, 2022, some rights reserved._
+_Tilmi, State of War PostBar, 2022 - 2024, some rights reserved._

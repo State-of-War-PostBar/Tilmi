@@ -5,7 +5,7 @@
 **************************************************************************************************
 *                                                                                                *
 *                     A tool for creating State of War's til and tmi files.                      *
-*               (ɔ) 2017 - 2022 State of War Baidu PostBar, some rights reserved.                *
+*               (ɔ) 2022 - 2024 State of War Baidu PostBar, some rights reserved.                *
 *                                                                                                *
 *             Tilmi is a free software. You can freely do whatever you want with it              *
 *     under the JUST DON'T BOTHER ME PUBLIC LICENSE (hereinafter referred to as the license)     *
@@ -329,7 +329,7 @@ MainWindowProc( HWND handle, UINT message, WPARAM wp, LPARAM lp )
                                        WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON,
                                        370, 680, 105, 30, handle, (HMENU) BTN_EXIT, program_instance, NULL);
 
-            // Set controls' font
+            // Set controls' fonts
             SendMessage(groupbox_mode1, WM_SETFONT, (WPARAM) ui_font[chosen_language], TRUE);
             SendMessage(edit_mode1_map_width, WM_SETFONT, (WPARAM) ui_font[chosen_language], TRUE);
             SendMessage(edit_mode1_map_height, WM_SETFONT, (WPARAM) ui_font[chosen_language], TRUE);
